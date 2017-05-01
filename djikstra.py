@@ -16,7 +16,7 @@ class Dijkstra(object):
     def get_edges(self):
         return self.edges
 
-    def find_shortest_path(self, start_vertex_key, end_vertex_key):
+    def find_shortest_distance(self, start_vertex_key, end_vertex_key):
         if start_vertex_key == end_vertex_key:
             return 0
 
@@ -29,16 +29,16 @@ class Dijkstra(object):
             min_edge = None
 
             for edge in avail_edges:
-                dis = edge.get_start_vertex().get_shortest_distance() + \
-                edge.get_distance()
-                if dis < min_distance:
-                    min_distance = dis
-                    min_edge = edge
+                if edge.get_end_vertex() not in visited:
+                    dis = edge.get_start_vertex().get_shortest_distance() + \
+                    edge.get_distance()
+                    if dis < min_distance:
+                        min_distance = dis
+                        min_edge = edge
 
             min_edge.get_end_vertex().set_shortest_distance(min_distance)
             min_edge.get_end_vertex().set_path(min_edge.get_start_vertex() \
                 .get_path() + [min_edge.get_start_vertex().get_key()])
-            avail_edges.remove(min_edge)
             current_vertex = min_edge.get_end_vertex()
             visited.add(current_vertex)
 
@@ -79,31 +79,31 @@ d = Dijkstra(file_name)
 # assert len(d.vertices[200].get_out_edges()) == 25
 # assert len(d.vertices[1].get_out_edges()) == 27
 
-print(7, d.find_shortest_path(1, 7))
+print(7, d.find_shortest_distance(1, 7))
 
 d = Dijkstra(file_name)
-print(37, d.find_shortest_path(1, 37))
+print(37, d.find_shortest_distance(1, 37))
 
 d = Dijkstra(file_name)
-print(59, d.find_shortest_path(1, 59))
+print(59, d.find_shortest_distance(1, 59))
 
 d = Dijkstra(file_name)
-print(82, d.find_shortest_path(1, 82))
+print(82, d.find_shortest_distance(1, 82))
 
 d = Dijkstra(file_name)
-print(99, d.find_shortest_path(1, 99))
+print(99, d.find_shortest_distance(1, 99))
 
 d = Dijkstra(file_name)
-print(115, d.find_shortest_path(1, 115))
+print(115, d.find_shortest_distance(1, 115))
 
 d = Dijkstra(file_name)
-print(133, d.find_shortest_path(1, 133))
+print(133, d.find_shortest_distance(1, 133))
 
 d = Dijkstra(file_name)
-print(165, d.find_shortest_path(1, 165))
+print(165, d.find_shortest_distance(1, 165))
 
 d = Dijkstra(file_name)
-print(188, d.find_shortest_path(1, 188))
+print(188, d.find_shortest_distance(1, 188))
 
 d = Dijkstra(file_name)
-print(197, d.find_shortest_path(1, 197))
+print(197, d.find_shortest_distance(1, 197))
