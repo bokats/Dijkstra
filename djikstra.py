@@ -1,5 +1,6 @@
 import os
 from vertex import Vertex, Edge
+from math import inf
 
 file_name = "dijkstraData.txt"
 
@@ -15,12 +16,37 @@ class Dijkstra(object):
     def get_edges(self):
         return self.edges
 
-    def find_shortest_path(start_vertex_key, end_vertex_key):
+    def find_shortest_path(self, start_vertex_key, end_vertex_key):
         if start_vertex_key == end_vertex_key:
             return 0
-        visited = set([start_vertex_key])
-        shortest = {start_vertex_key: 0}
-        path = {start_vertex_key: []}
+
+        visited = set([self.vertices[start_vertex_key]])
+        current_vertex = self.vertices[start_vertex_key]
+        avail_edges = current_vertex.get_out_edges()
+
+        while current_vertex.get_key() != end_vertex_key:
+            min_distance = inf
+            min_edge = None
+
+            for edge in avail_edges:
+                dis = edge.get_start_vertex().get_shortest_distance() + \
+                edge.get_distance()
+                if dis < min_distance:
+                    min_distance = dis
+                    min_edge = edge
+
+            min_edge.get_end_vertex().set_shortest_distance(min_distance)
+            min_edge.get_end_vertex().set_path(min_edge.get_start_vertex() \
+                .get_path() + [min_edge.get_start_vertex().get_key()])
+            avail_edges.remove(min_edge)
+            current_vertex = min_edge.get_end_vertex()
+            visited.add(current_vertex)
+
+            for edge in current_vertex.get_out_edges():
+                if edge.get_end_vertex() not in visited:
+                    avail_edges.append(edge)
+
+        return current_vertex.get_shortest_distance()
 
     def convert_adj_list_to_graph(self, file_path):
         file = open(file_path, "r")
@@ -50,7 +76,34 @@ class Dijkstra(object):
 # Tests
 
 d = Dijkstra(file_name)
-assert len(d.vertices[200].get_out_edges()) == 25
-assert len(d.vertices[1].get_out_edges()) == 27
+# assert len(d.vertices[200].get_out_edges()) == 25
+# assert len(d.vertices[1].get_out_edges()) == 27
 
-print(d.get_edges()[1])
+print(7, d.find_shortest_path(1, 7))
+
+d = Dijkstra(file_name)
+print(37, d.find_shortest_path(1, 37))
+
+d = Dijkstra(file_name)
+print(59, d.find_shortest_path(1, 59))
+
+d = Dijkstra(file_name)
+print(82, d.find_shortest_path(1, 82))
+
+d = Dijkstra(file_name)
+print(99, d.find_shortest_path(1, 99))
+
+d = Dijkstra(file_name)
+print(115, d.find_shortest_path(1, 115))
+
+d = Dijkstra(file_name)
+print(133, d.find_shortest_path(1, 133))
+
+d = Dijkstra(file_name)
+print(165, d.find_shortest_path(1, 165))
+
+d = Dijkstra(file_name)
+print(188, d.find_shortest_path(1, 188))
+
+d = Dijkstra(file_name)
+print(197, d.find_shortest_path(1, 197))

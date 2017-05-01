@@ -29,16 +29,16 @@ class Vertex(object):
         self.out_edges.append(edge)
 
 class Edge(object):
-    def __init__(self, start_node, end_node, distance):
-        self.start_node = start_node
-        self.end_node = end_node
+    def __init__(self, start_vertex, end_vertex, distance):
+        self.start_vertex = start_vertex
+        self.end_vertex = end_vertex
         self.distance = distance
 
-    def get_start_node(self):
-        return self.start_node
+    def get_start_vertex(self):
+        return self.start_vertex
 
-    def get_end_node(self):
-        return self.end_node
+    def get_end_vertex(self):
+        return self.end_vertex
 
     def get_distance(self):
         return self.distance
@@ -62,6 +62,6 @@ class Edge(object):
 # n.add_out_edge(e)
 # assert n.get_out_edges() == [e]
 #
-# assert e.get_start_node() == n
-# assert e.get_end_node() == n2
+# assert e.get_start_vertex() == n
+# assert e.get_end_vertex() == n2
 # assert e.get_distance() == 5
