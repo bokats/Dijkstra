@@ -1,8 +1,12 @@
-class Node(object):
-    def __init__(self):
+class Vertex(object):
+    def __init__(self, key):
+        self.key = key
         self.shortest_distance = 0
         self.shortest_path = []
         self.out_edges = []
+
+    def get_key(self):
+        return self.key
 
     def get_shortest_distance(self):
         return self.shortest_distance
@@ -41,15 +45,15 @@ class Edge(object):
 
 # Tests
 
-# n = Node()
+# n = Vertex()
 # assert n.get_shortest_distance() == 0
 # assert n.get_path() == []
 # assert n.get_out_edges() == []
 #
 # n.set_shortest_distance(3)
 # assert n.get_shortest_distance() == 3
-# n2 = Node()
-# n3 = Node()
+# n2 = Vertex()
+# n3 = Vertex()
 # n.set_path([n2, n3])
 # assert n.get_path() == [n2,n3]
 #
